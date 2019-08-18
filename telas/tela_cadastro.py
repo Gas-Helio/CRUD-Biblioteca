@@ -10,14 +10,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+class Ui_Tela_Cadastro(object):
+    def setupUi(self, Tela_Cadastro):
+        Tela_Cadastro.setObjectName("Tela_Cadastro")
+        Tela_Cadastro.resize(800, 600)
         font = QtGui.QFont()
         font.setFamily("Lucida Sans Unicode")
-        MainWindow.setFont(font)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        Tela_Cadastro.setFont(font)
+        self.centralwidget = QtWidgets.QWidget(Tela_Cadastro)
         self.centralwidget.setObjectName("centralwidget")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(230, 100, 351, 381))
@@ -83,35 +83,47 @@ class Ui_MainWindow(object):
         font.setFamily("Lucida Sans Unicode")
         font.setPointSize(9)
         self.botao_salvar.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("images/save_file_disk_open_searsh_loading_clipboard_1513.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botao_salvar.setIcon(icon)
+        self.botao_salvar.setIconSize(QtCore.QSize(16, 16))
         self.botao_salvar.setObjectName("botao_salvar")
         self.verticalLayout.addWidget(self.botao_salvar)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.toolButton = QtWidgets.QToolButton(self.centralwidget)
+        self.toolButton.setGeometry(QtCore.QRect(230, 40, 41, 41))
+        self.toolButton.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("images/back_12955.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.toolButton.setIcon(icon1)
+        self.toolButton.setIconSize(QtCore.QSize(28, 28))
+        self.toolButton.setObjectName("toolButton")
+        Tela_Cadastro.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Tela_Cadastro)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        Tela_Cadastro.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Tela_Cadastro)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        Tela_Cadastro.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Tela_Cadastro)
+        QtCore.QMetaObject.connectSlotsByName(Tela_Cadastro)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Tela_Cadastro):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_3.setText(_translate("MainWindow", "CADASTRO"))
-        self.label.setText(_translate("MainWindow", "Nome:"))
-        self.label_2.setText(_translate("MainWindow", "E-mail:"))
-        self.label_4.setText(_translate("MainWindow", "Senha:"))
-        self.botao_salvar.setText(_translate("MainWindow", "Salvar"))
+        Tela_Cadastro.setWindowTitle(_translate("Tela_Cadastro", "MainWindow"))
+        self.label_3.setText(_translate("Tela_Cadastro", "CADASTRO"))
+        self.label.setText(_translate("Tela_Cadastro", "Nome:"))
+        self.label_2.setText(_translate("Tela_Cadastro", "E-mail:"))
+        self.label_4.setText(_translate("Tela_Cadastro", "Senha:"))
+        self.botao_salvar.setText(_translate("Tela_Cadastro", "SALVAR"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    Tela_Cadastro = QtWidgets.QMainWindow()
+    ui = Ui_Tela_Cadastro()
+    ui.setupUi(Tela_Cadastro)
+    Tela_Cadastro.show()
     sys.exit(app.exec_())

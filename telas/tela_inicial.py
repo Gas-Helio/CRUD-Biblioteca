@@ -10,14 +10,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+class Ui_Tela_Inicio(object):
+    def setupUi(self, Tela_Inicio):
+        Tela_Inicio.setObjectName("Tela_Inicio")
+        Tela_Inicio.resize(800, 600)
         font = QtGui.QFont()
         font.setFamily("Lucida Sans Unicode")
-        MainWindow.setFont(font)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        Tela_Inicio.setFont(font)
+        self.centralwidget = QtWidgets.QWidget(Tela_Inicio)
         self.centralwidget.setObjectName("centralwidget")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(230, 80, 351, 381))
@@ -69,6 +69,9 @@ class Ui_MainWindow(object):
         font.setFamily("Lucida Sans Unicode")
         font.setPointSize(9)
         self.botao_entrar.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("images/Login_37128.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botao_entrar.setIcon(icon)
         self.botao_entrar.setObjectName("botao_entrar")
         self.verticalLayout.addWidget(self.botao_entrar)
         self.botao_criar_conta = QtWidgets.QPushButton(self.layoutWidget)
@@ -76,35 +79,39 @@ class Ui_MainWindow(object):
         font.setFamily("Lucida Sans Unicode")
         font.setPointSize(9)
         self.botao_criar_conta.setFont(font)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("images/uer.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botao_criar_conta.setIcon(icon1)
+        self.botao_criar_conta.setIconSize(QtCore.QSize(16, 16))
         self.botao_criar_conta.setObjectName("botao_criar_conta")
         self.verticalLayout.addWidget(self.botao_criar_conta)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        Tela_Inicio.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Tela_Inicio)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        Tela_Inicio.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Tela_Inicio)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        Tela_Inicio.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Tela_Inicio)
+        QtCore.QMetaObject.connectSlotsByName(Tela_Inicio)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Tela_Inicio):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_3.setText(_translate("MainWindow", "LOGIN"))
-        self.label.setText(_translate("MainWindow", "E-mail:"))
-        self.label_2.setText(_translate("MainWindow", "Senha:"))
-        self.botao_entrar.setText(_translate("MainWindow", "ENTRAR"))
-        self.botao_criar_conta.setText(_translate("MainWindow", "CRIAR CONTA"))
+        Tela_Inicio.setWindowTitle(_translate("Tela_Inicio", "MainWindow"))
+        self.label_3.setText(_translate("Tela_Inicio", "LOGIN"))
+        self.label.setText(_translate("Tela_Inicio", "E-mail:"))
+        self.label_2.setText(_translate("Tela_Inicio", "Senha:"))
+        self.botao_entrar.setText(_translate("Tela_Inicio", "ENTRAR"))
+        self.botao_criar_conta.setText(_translate("Tela_Inicio", "CRIAR CONTA"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    Tela_Inicio = QtWidgets.QMainWindow()
+    ui = Ui_Tela_Inicio()
+    ui.setupUi(Tela_Inicio)
+    Tela_Inicio.show()
     sys.exit(app.exec_())

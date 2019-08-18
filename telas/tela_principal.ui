@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Tela_Principal</class>
+ <widget class="QMainWindow" name="Tela_Principal">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>70</y>
+      <y>90</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -37,7 +37,7 @@
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>310</y>
+      <y>330</y>
       <width>291</width>
       <height>81</height>
      </rect>
@@ -51,12 +51,22 @@
     <property name="text">
      <string>VER ACERVO</string>
     </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>images/lupa.png</normaloff>images/lupa.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>25</width>
+      <height>25</height>
+     </size>
+    </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>10</y>
+      <y>30</y>
       <width>511</width>
       <height>451</height>
      </rect>
@@ -66,7 +76,7 @@
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>220</y>
+      <y>240</y>
       <width>291</width>
       <height>81</height>
      </rect>
@@ -80,12 +90,22 @@
     <property name="text">
      <string>CADASTAR NOVO LIVRO</string>
     </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>images/new-file_40454.png</normaloff>images/new-file_40454.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>25</width>
+      <height>25</height>
+     </size>
+    </property>
    </widget>
    <widget class="QPushButton" name="sair">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>450</y>
+      <x>610</x>
+      <y>100</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -98,6 +118,10 @@
     </property>
     <property name="text">
      <string>SAIR</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>images/exit.png</normaloff>images/exit.png</iconset>
     </property>
    </widget>
    <zorder>textBrowser</zorder>
@@ -112,7 +136,7 @@
      <x>0</x>
      <y>0</y>
      <width>926</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Tela_Inicio</class>
+ <widget class="QMainWindow" name="Tela_Inicio">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -116,6 +116,10 @@
        <property name="text">
         <string>ENTRAR</string>
        </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>images/Login_37128.png</normaloff>images/Login_37128.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -128,6 +132,16 @@
        </property>
        <property name="text">
         <string>CRIAR CONTA</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>images/uer.png</normaloff>images/uer.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
        </property>
       </widget>
      </item>

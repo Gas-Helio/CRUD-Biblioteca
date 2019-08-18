@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Tela_Cadastro_Livro</class>
+ <widget class="QMainWindow" name="Tela_Cadastro_Livro">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -79,6 +79,10 @@
     </property>
     <property name="text">
      <string>SALVAR</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>images/save_file_disk_open_searsh_loading_clipboard_1513.png</normaloff>images/save_file_disk_open_searsh_loading_clipboard_1513.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -175,14 +179,23 @@
    <widget class="QPushButton" name="botao_selecionar_img">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>100</x>
       <y>340</y>
-      <width>141</width>
+      <width>181</width>
       <height>28</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>SELECIONAR IMAGEM</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>images/imageup_imagen_12892.png</normaloff>images/imageup_imagen_12892.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="colocar_imagem">
@@ -247,7 +260,7 @@
      <x>0</x>
      <y>0</y>
      <width>926</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
