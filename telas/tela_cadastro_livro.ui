@@ -35,7 +35,7 @@
      <string>Título:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="titulo">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -68,7 +68,7 @@
      <string>Dados do livro</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="botao_salvar_livro">
     <property name="geometry">
      <rect>
       <x>740</x>
@@ -99,7 +99,7 @@
      <string>Autor: </string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="autor">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -114,7 +114,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="qtd_pag">
     <property name="geometry">
      <rect>
       <x>615</x>
@@ -147,7 +147,7 @@
      <string>Ano de publicação:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="ano_publi">
     <property name="geometry">
      <rect>
       <x>615</x>
@@ -172,7 +172,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="botao_selecionar_img">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -185,7 +185,7 @@
      <string>SELECIONAR IMAGEM</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="colocar_imagem">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -202,18 +202,18 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>90</y>
+      <y>80</y>
       <width>861</width>
       <height>351</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>615</x>
-      <y>151</y>
-      <width>213</width>
+      <x>610</x>
+      <y>150</y>
+      <width>221</width>
       <height>24</height>
      </rect>
     </property>
@@ -228,17 +228,18 @@
    </widget>
    <zorder>textBrowser</zorder>
    <zorder>label</zorder>
-   <zorder>lineEdit</zorder>
+   <zorder>titulo</zorder>
    <zorder>label_2</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>botao_salvar_livro</zorder>
    <zorder>label_3</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>lineEdit_3</zorder>
+   <zorder>autor</zorder>
+   <zorder>qtd_pag</zorder>
    <zorder>label_5</zorder>
-   <zorder>lineEdit_4</zorder>
+   <zorder>ano_publi</zorder>
    <zorder>textBrowser_2</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>label_6</zorder>
+   <zorder>botao_selecionar_img</zorder>
+   <zorder>colocar_imagem</zorder>
+   <zorder>label_7</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -249,14 +250,6 @@
      <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuLIVROS">
-    <property name="title">
-     <string>LIVROS</string>
-    </property>
-    <addaction name="actionBUSCAR"/>
-    <addaction name="actionLISTAR"/>
-   </widget>
-   <addaction name="menuLIVROS"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionMOSTRAR_LIVROS_CADASTRADOS">

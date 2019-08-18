@@ -47,7 +47,7 @@
      <string>CADASTRO</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -73,7 +73,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="nome">
        <property name="font">
         <font>
          <family>Lucida Sans Unicode</family>
@@ -96,7 +96,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="e_mail">
        <property name="font">
         <font>
          <family>Lucida Sans Unicode</family>
@@ -119,7 +119,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="senha">
        <property name="font">
         <font>
          <family>Lucida Sans Unicode</family>
@@ -129,7 +129,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="botao_salvar">
        <property name="font">
         <font>
          <family>Lucida Sans Unicode</family>
