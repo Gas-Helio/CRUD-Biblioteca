@@ -37,30 +37,29 @@ class FireBaseSD:
             os.makedirs(cacheImgs)
 
     def creatUser(self, dados):
-        d = None
+        dado = None
         try:
             _email = dados['email']
             _password = dados['password']
             del dados['password']
             self._user = self._auth.create_user_with_email_and_password(_email, _password)
             self._db.child('users').child(self._user['localId']).set(dados)
-            d = self._db.child('users').child(self._user['localId']).get().val()
+            dado = self._db.child('users').child(self._user['localId']).get().val()
+            return self._user, dado
+        except Exception as e:
+            _error_json = e.args[1]
+            _error = json.loads(_error_json)['error']
+            return None, None
+
+    def login(self, email, password):
+        
+        try:
+            self._user = self._auth.sign_in_with_email_and_password(email, password)
             return self._user
         except Exception as e:
             _error_json = e.args[1]
             _error = json.loads(_error_json)['error']
             return None
-
-    def login(self, email, password):
-        if not check_host():
-            return 'Não conectado'
-        try:
-            self._user = self._auth.sign_in_with_email_and_password(email, password)
-            return 'Ok'
-        except Exception as e:
-            _error_json = e.args[1]
-            _error = json.loads(_error_json)['error']
-            return _error['message']
 
     def updateUserDados(self, dados):
         if check_host():
@@ -207,6 +206,9 @@ class FireBaseSD:
         if book == None:
             return 'Livro não disponivel'
         self._db.child('books').child(book['isbn']).update({'visible': True})
+
+    def buscarUsuario(self, id):
+        return self._db.child('users/'+str(id)).get().val()
 
 # Inicio validação
 

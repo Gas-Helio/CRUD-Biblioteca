@@ -20,63 +20,6 @@ config = {
 }
 
 
-# class Tela_Inicio(QMainWindow):
-
-#     def __init__(self):
-#         super().__init__()
-#         self.firebase = fireBaseSD.initFb(config)
-#         self.ui = Ui_Tela_Inicio()
-#         self.ui.setupUi(self)
-#         self.ui.botao_entrar.clicked.connect(self.entrar)
-#         self.ui.botao_criar_conta.clicked.connect(self.abrir_criar_conta)
-#         self.show()
-
-
-#     def entrar(self):
-#         # if(self.firebase.login(self.ui.e_mail_login.text(), self.ui.senha_login.text()) == 'Ok'):
-#         #     print('login feito')
-#         # else:
-#         #     print('erro')
-
-#         if(self.firebase.login(self.ui.e_mail_login.text(), self.ui.senha_login.text()) == 'Ok'):
-#             QMessageBox.about(self,'Deu certo','Eu foda!!')
-#         else:
-#             QMessageBox.about(self,'Erro','E-mail ou senha incorretos!!')
-        
-
-#     def abrir_criar_conta(self):
-#         Tela_Cadastro().__init__()
-#         # self.ui.setupUi(self)
-
-# class Tela_Cadastro(QMainWindow):
-
-#     def __init__(self):
-#         super().__init__()
-#         self.tela = Ui_Tela_Cadastro()
-#         self.tela.setupUi(self)
-#         self.showw()
-#         self.show()
-#     # def cirar_conta(self):
-
-#     def showw(self):
-#         print('aqui')
-
-
-# # class Tela_Cadastro_Livro(QMainWindow):
-# #     def __init__(self):
-# #         super().__init__()
-
-
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     # MainWindow = QtWidgets.QMainWindow()
-#     ui = Tela_Inicio()
-#     # ui.setupUi(MainWindow)
-#     # MainWindow.show()
-#     sys.exit(app.exec_())
-
-
 class Ui_Main(QtWidgets.QWidget):
     def setupUi(self, Main):
         Main.setObjectName('Main')
@@ -114,24 +57,44 @@ class Main(QMainWindow, Ui_Main):
         self.user = None
         self.setupUi(self)
 
+        self.tela_inicio.botao_entrar.clicked.connect(self.entrar)
         self.tela_inicio.botao_criar_conta.clicked.connect(self.openCriarConta)
+
         self.tela_cadastro.botao_salvar.clicked.connect(self.criarConta)
+        self.tela_cadastro.toolButton.clicked.connect(self.voltarInicio)
 
     def openCriarConta(self):
         self.QtStack.setCurrentIndex(1)
+
+    def entrar(self):
+        self.user = self.firebase.login(self.tela_inicio.e_mail_login.text(), 
+                                    self.tela_inicio.senha_login.text())
+        if self.user != None:
+            dados = self.firebase.buscarUsuario(self.user['localId'])
+            # print(dados['nome'])
+            self.tela_principal.label.setText('Olá, '+str(dados['nome']))
+            self.QtStack.setCurrentIndex(2)
+        else:
+            QMessageBox.about(self, 'Atenção', 'E-mail ou senha inválidos')
+
     
     def criarConta(self):
-        
-        self.user = self.firebase.creatUser({
+
+        self.user, dados = self.firebase.creatUser({
             'nome': self.tela_cadastro.nome.text(),
             'email': self.tela_cadastro.e_mail.text(),
             'password': self.tela_cadastro.senha.text(),
             })
 
-        if self.user is not None:
-            print('usuario criado '+self.user['email'])
+        if self.user != None:
+            QMessageBox.about(self, 'Atenção', 'Cadastro realizado com sucesso!')
+            self.QtStack.setCurrentIndex(0)
+            # print('usuario criado '+self.user['email'])
         else:
-            print('erro ao criar')
+            QMessageBox.about(self, 'Atenção', 'Desculpe, não foi possível completar seu cadastro!')
+
+    def voltarInicio(self):
+        self.QtStack.setCurrentIndex(0)
 
 
 if __name__ == '__main__':
