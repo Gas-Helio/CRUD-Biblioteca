@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'tela_cadastro_livro.ui'
+#
+# Created by: PyQt5 UI code generator 5.13.0
+#
+# WARNING! All changes made in this file will be lost!
+
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -27,7 +36,7 @@ class Ui_Tela_Cadastro_Livro(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.botao_salvar_livro = QtWidgets.QPushButton(self.centralwidget)
-        self.botao_salvar_livro.setGeometry(QtCore.QRect(740, 340, 93, 28))
+        self.botao_salvar_livro.setGeometry(QtCore.QRect(700, 340, 101, 28))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images/save_file_disk_open_searsh_loading_clipboard_1513.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.botao_salvar_livro.setIcon(icon)
@@ -62,9 +71,6 @@ class Ui_Tela_Cadastro_Livro(object):
         font.setPointSize(11)
         self.ano_publi.setFont(font)
         self.ano_publi.setObjectName("ano_publi")
-        self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(120, 140, 141, 192))
-        self.textBrowser_2.setObjectName("textBrowser_2")
         self.botao_selecionar_img = QtWidgets.QPushButton(self.centralwidget)
         self.botao_selecionar_img.setGeometry(QtCore.QRect(100, 340, 181, 28))
         font = QtGui.QFont()
@@ -75,11 +81,11 @@ class Ui_Tela_Cadastro_Livro(object):
         self.botao_selecionar_img.setIcon(icon1)
         self.botao_selecionar_img.setObjectName("botao_selecionar_img")
         self.colocar_imagem = QtWidgets.QLabel(self.centralwidget)
-        self.colocar_imagem.setGeometry(QtCore.QRect(120, 140, 141, 191))
+        self.colocar_imagem.setGeometry(QtCore.QRect(110, 130, 161, 201))
         self.colocar_imagem.setText("")
         self.colocar_imagem.setObjectName("colocar_imagem")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setGeometry(QtCore.QRect(30, 80, 861, 351))
+        self.textBrowser.setGeometry(QtCore.QRect(-20, 0, 951, 531))
         self.textBrowser.setObjectName("textBrowser")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(610, 150, 221, 24))
@@ -87,23 +93,30 @@ class Ui_Tela_Cadastro_Livro(object):
         font.setPointSize(12)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
+        self.textBrowser_3 = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser_3.setGeometry(QtCore.QRect(90, 110, 751, 321))
+        self.textBrowser_3.setObjectName("textBrowser_3")
+        self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser_2.setGeometry(QtCore.QRect(110, 130, 161, 201))
+        self.textBrowser_2.setObjectName("textBrowser_2")
         self.textBrowser.raise_()
-        self.label.raise_()
-        self.titulo.raise_()
         self.label_2.raise_()
-        self.botao_salvar_livro.raise_()
-        self.label_3.raise_()
-        self.autor.raise_()
-        self.qtd_pag.raise_()
         self.label_5.raise_()
-        self.ano_publi.raise_()
-        self.textBrowser_2.raise_()
-        self.botao_selecionar_img.raise_()
-        self.colocar_imagem.raise_()
+        self.textBrowser_3.raise_()
         self.label_7.raise_()
+        self.titulo.raise_()
+        self.label.raise_()
+        self.label_3.raise_()
+        self.qtd_pag.raise_()
+        self.autor.raise_()
+        self.ano_publi.raise_()
+        self.botao_salvar_livro.raise_()
+        self.botao_selecionar_img.raise_()
+        self.textBrowser_2.raise_()
+        self.colocar_imagem.raise_()
         Tela_Cadastro_Livro.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Tela_Cadastro_Livro)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 926, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 926, 22))
         self.menubar.setObjectName("menubar")
         Tela_Cadastro_Livro.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Tela_Cadastro_Livro)

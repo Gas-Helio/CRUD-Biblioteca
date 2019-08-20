@@ -63,6 +63,8 @@ class Main(QMainWindow, Ui_Main):
         self.tela_cadastro.botao_salvar.clicked.connect(self.criarConta)
         self.tela_cadastro.toolButton.clicked.connect(self.voltarInicio)
 
+        self.tela_principal.cadastrar_novo_livro.clicked.connect(self.openCadastrarLivro)
+
     def openCriarConta(self):
         self.QtStack.setCurrentIndex(1)
 
@@ -96,6 +98,18 @@ class Main(QMainWindow, Ui_Main):
     def voltarInicio(self):
         self.QtStack.setCurrentIndex(0)
 
+
+    def openCadastrarLivro(self):
+        self.QtStack.setCurrentIndex(3)
+
+    def cadastrarLivro(self):
+        dados_livro = {
+                'titulo': self.tela_cadastro_livro.titulo.text(),
+                'isbn': '',
+                'quantPaginas': self.tela_cadastro_livro.qtd_pag.text(),
+                'autor': self.tela_cadastro_livro.autor.text(),
+                'ano': self.tela_cadastro_livro.ano_publi.text()
+                }
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
