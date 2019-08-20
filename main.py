@@ -7,7 +7,7 @@ from telas.tela_principal import Ui_Tela_Principal
 import sys
 import os
 from PyQt5.QtCore import pyqtSlot
-import fireBaseSD
+from fireBaseSD import FireBaseSD
 
 config = {
     'apiKey': "AIzaSyDZYQ53lbRVwuuUhQ0qCsCPGE2tiNPSDO4",
@@ -76,6 +76,7 @@ config = {
 #     # MainWindow.show()
 #     sys.exit(app.exec_())
 
+
 class Ui_Main(QtWidgets.QWidget):
     def setupUi(self, Main):
         Main.setObjectName('Main')
@@ -105,15 +106,33 @@ class Ui_Main(QtWidgets.QWidget):
         self.QtStack.addWidget(self.stack2)
         self.QtStack.addWidget(self.stack3)
 
+
 class Main(QMainWindow, Ui_Main):
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)
+        self.firebase = FireBaseSD(config)
+        self.user = None
         self.setupUi(self)
 
-        self.tela_inicio.botao_criar_conta.clicked.connect(self.criar_conta)
+        self.tela_inicio.botao_criar_conta.clicked.connect(self.openCriarConta)
+        self.tela_cadastro.botao_salvar.clicked.connect(self.criarConta)
 
-    def criar_conta(self):
+    def openCriarConta(self):
         self.QtStack.setCurrentIndex(1)
+    
+    def criarConta(self):
+        
+        self.user = self.firebase.creatUser({
+            'nome': self.tela_cadastro.nome.text(),
+            'email': self.tela_cadastro.e_mail.text(),
+            'password': self.tela_cadastro.senha.text(),
+            })
+
+        if self.user is not None:
+            print('usuario criado '+self.user['email'])
+        else:
+            print('erro ao criar')
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

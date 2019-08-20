@@ -37,20 +37,19 @@ class FireBaseSD:
             os.makedirs(cacheImgs)
 
     def creatUser(self, dados):
-        if check_host():
-            return 'Não conectado'
+        d = None
         try:
             _email = dados['email']
             _password = dados['password']
             del dados['password']
             self._user = self._auth.create_user_with_email_and_password(_email, _password)
-            dados['ativo'] = True
             self._db.child('users').child(self._user['localId']).set(dados)
-            return 'Ok'
+            d = self._db.child('users').child(self._user['localId']).get().val()
+            return self._user
         except Exception as e:
             _error_json = e.args[1]
             _error = json.loads(_error_json)['error']
-            return _error['message']
+            return None
 
     def login(self, email, password):
         if not check_host():
