@@ -85,7 +85,7 @@ class Main(QMainWindow, Ui_Main):
         self.tela_cadastro_livro.botao_salvar_livro.clicked.connect(self.cadastrarLivro)
 
         self.tela_buscar.botao_voltar.clicked.connect(self.voltarPrincipal)
-
+        self.tela_buscar.tableWidget.cellClicked.connect(self.celulaClicada)
 
     def openCriarConta(self):
         self.QtStack.setCurrentIndex(1)
@@ -130,19 +130,21 @@ class Main(QMainWindow, Ui_Main):
     def openAcervoLivro(self):
         dados_livros = self.firebase.buscarAllBooks()
 
-        self.tela_buscar.tableWidget.setColumnWidth(0, 293)
-        self.tela_buscar.tableWidget.setColumnWidth(1, 293)
-        self.tela_buscar.tableWidget.setColumnWidth(2, 165)
-        self.tela_buscar.tableWidget.setColumnWidth(3, 127)
+        self.tela_buscar.tableWidget.setColumnWidth(0, 95)
+        self.tela_buscar.tableWidget.setColumnWidth(1, 273)
+        self.tela_buscar.tableWidget.setColumnWidth(2, 273)
+        self.tela_buscar.tableWidget.setColumnWidth(3, 125)
+        self.tela_buscar.tableWidget.setColumnWidth(4, 100)
 
         if dados_livros != None:
             self.tela_buscar.tableWidget.setRowCount(len(dados_livros))
             for i, value in enumerate(dados_livros):
-                self.tela_buscar.tableWidget.setItem(i, 0, QTableWidgetItem(str(dados_livros[value]['titulo'])))
-                self.tela_buscar.tableWidget.setItem(i, 1, QTableWidgetItem(str(dados_livros[value]['autor'])))
-                self.tela_buscar.tableWidget.setItem(i, 2, QTableWidgetItem(str(dados_livros[value]['quantPaginas'])))
-                self.tela_buscar.tableWidget.setItem(i, 3, QTableWidgetItem(str(dados_livros[value]['ano'])))
-
+                self.tela_buscar.tableWidget.setItem(i, 0, QTableWidgetItem(str(value)))
+                self.tela_buscar.tableWidget.setItem(i, 1, QTableWidgetItem(str(dados_livros[value]['titulo'])))
+                self.tela_buscar.tableWidget.setItem(i, 2, QTableWidgetItem(str(dados_livros[value]['autor'])))
+                self.tela_buscar.tableWidget.setItem(i, 3, QTableWidgetItem(str(dados_livros[value]['quantPaginas'])))
+                self.tela_buscar.tableWidget.setItem(i, 4, QTableWidgetItem(str(dados_livros[value]['ano'])))
+        
         self.QtStack.setCurrentIndex(5)
     
     def selecionarImagem(self):
@@ -168,6 +170,20 @@ class Main(QMainWindow, Ui_Main):
         else:
             QMessageBox.about(self, 'Atenção', 'Erro ao cadastrar livro!')
 
+    def celulaClicada(self):
+        row = self.tela_buscar.tableWidget.currentRow()
+        
+        # dados_livro = {
+        #             'isbn': self.tela_buscar.tableWidget.item(row, 0).text(),
+        #             'titulo': self.tela_buscar.tableWidget.item(row, 1).text(),
+        #             'autor': self.tela_buscar.tableWidget.item(row, 2).text(),
+        #             'qauntPaginas': self.tela_buscar.tableWidget.item(row, 3).text(),
+        #             'ano': self.tela_buscar.tableWidget.item(row, 4).text()
+        #             }
+        
+        # print(dados_livro)
+        dados_livros = self.firebase.buscarOneBook(self.tela_buscar.tableWidget.item(row, 0).text())
+        print(dados_livros)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

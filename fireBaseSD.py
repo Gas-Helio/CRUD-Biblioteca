@@ -214,6 +214,9 @@ class FireBaseSD:
     def buscarAllBooks(self):
         return self._db.child('books').get().val()
 
+    def buscarOneBook(self, isbn):
+        return self._db.child('books/'+str(isbn)).get().val()
+
     def buscarPorTitulo(self, titulo):
         pass
 

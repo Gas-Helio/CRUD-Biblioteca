@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QAbstractItemView
 
 
 class Ui_Tela_Buscar(object):
@@ -38,11 +39,12 @@ class Ui_Tela_Buscar(object):
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableWidget.setGeometry(QtCore.QRect(20, 140, 881, 331))
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(4)
-        self.tableWidget.setHorizontalHeaderLabels(['Título', 'Autor', 'Nº de páginas', 'Ano'])
+        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setHorizontalHeaderLabels(['ISBN', 'Título', 'Autor', 'Nº de páginas', 'Ano'])
         self.botao_voltar = QtWidgets.QPushButton(self.centralwidget)
         self.botao_voltar.setGeometry(QtCore.QRect(20, 20, 41, 41))
         self.botao_voltar.setText("")
