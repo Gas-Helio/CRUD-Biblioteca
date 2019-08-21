@@ -281,6 +281,9 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="botao_excluir_livro">
     <property name="geometry">
