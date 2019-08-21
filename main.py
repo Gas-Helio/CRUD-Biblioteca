@@ -7,6 +7,7 @@ from telas.tela_buscar import Ui_Tela_Buscar
 from telas.tela_principal import Ui_Tela_Principal
 from telas.tela_acervo import Ui_Tela_Acervo
 from telas.tela_buscar import Ui_Tela_Buscar
+from telas.tela_editar_livro import Ui_Tela_Editar_Livro
 from PyQt5.QtGui import QPixmap
 import PyQt5
 import sys
@@ -38,6 +39,7 @@ class Ui_Main(QtWidgets.QWidget):
         self.stack3 = QtWidgets.QMainWindow()
         self.stack4 = QtWidgets.QMainWindow()
         self.stack5 = QtWidgets.QMainWindow()
+        self.stack6 = QtWidgets.QMainWindow()
 
         self.tela_inicio = Ui_Tela_Inicio()
         self.tela_inicio.setupUi(self.stack0)
@@ -57,12 +59,16 @@ class Ui_Main(QtWidgets.QWidget):
         self.tela_buscar = Ui_Tela_Buscar()
         self.tela_buscar.setupUi(self.stack5)
 
+        self.tela_editar_livro = Ui_Tela_Editar_Livro()
+        self.tela_editar_livro.setupUi(self.stack6)
+
         self.QtStack.addWidget(self.stack0)
         self.QtStack.addWidget(self.stack1)
         self.QtStack.addWidget(self.stack2)
         self.QtStack.addWidget(self.stack3)
         self.QtStack.addWidget(self.stack4)
         self.QtStack.addWidget(self.stack5)
+        self.QtStack.addWidget(self.stack6)
 
 
 class Main(QMainWindow, Ui_Main):
