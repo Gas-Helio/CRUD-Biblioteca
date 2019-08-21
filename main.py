@@ -76,6 +76,7 @@ class Main(QMainWindow, Ui_Main):
         super(Main, self).__init__(parent)
         self.firebase = FireBaseSD(config)
         self.user = None
+        self.capaEdited = False
         self.setupUi(self)
 
         self.tela_inicio.botao_entrar.clicked.connect(self.entrar)
@@ -93,6 +94,10 @@ class Main(QMainWindow, Ui_Main):
         self.tela_buscar.botao_voltar.clicked.connect(self.voltarPrincipal)
         self.tela_buscar.tableWidget.cellClicked.connect(self.celulaClicada)
         self.tela_buscar.pushButton.clicked.connect(self.buscar)
+
+        self.tela_editar_livro.botao_editar_livro.clicked.connect(self.editarLivro)
+        self.tela_editar_livro.botao_selecionar_img.clicked.connect(self.selecionarImagemEditar)
+        self.tela_editar_livro.botao_excluir_livro.clicked.connect(self.excluirLivro)
 
     def openCriarConta(self):
         self.QtStack.setCurrentIndex(1)
@@ -151,12 +156,12 @@ class Main(QMainWindow, Ui_Main):
                 self.tela_buscar.tableWidget.setItem(i, 2, QTableWidgetItem(str(dados_livros[value]['autor'])))
                 self.tela_buscar.tableWidget.setItem(i, 3, QTableWidgetItem(str(dados_livros[value]['quantPaginas'])))
                 self.tela_buscar.tableWidget.setItem(i, 4, QTableWidgetItem(str(dados_livros[value]['ano'])))
-        
+        else:
+            for _ in range(self.tela_buscar.tableWidget.rowCount()):
+                self.tela_buscar.tableWidget.removeRow(_)
         self.QtStack.setCurrentIndex(5)
     
     def selecionarImagem(self):
-        import os
-        homedir = os.environ['HOME']
         self.fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Single File', '/home', "PNG (*.png);;JPEG  (*.jpeg);;JPG  (*.jpg)")
         pixmap = QPixmap(self.fileName)
         pixmap1 = pixmap.scaled(161, 201)
@@ -184,16 +189,19 @@ class Main(QMainWindow, Ui_Main):
                     'isbn': self.tela_buscar.tableWidget.item(row, 0).text(),
                     'titulo': self.tela_buscar.tableWidget.item(row, 1).text(),
                     'autor': self.tela_buscar.tableWidget.item(row, 2).text(),
-                    'qauntPaginas': self.tela_buscar.tableWidget.item(row, 3).text(),
+                    'quantPaginas': self.tela_buscar.tableWidget.item(row, 3).text(),
                     'ano': self.tela_buscar.tableWidget.item(row, 4).text()
                     }
         path_img = self.firebase.buscarOneBook(self.tela_buscar.tableWidget.item(row, 0).text())
         self.tela_editar_livro.titulo.setText(dados_livro['titulo'])
         self.tela_editar_livro.ano_publi.setText(dados_livro['ano'])
+        self.tela_editar_livro.autor.setText(dados_livro['autor'])
+        self.tela_editar_livro.qtd_pag.setText(dados_livro['quantPaginas'])
+        self.tela_editar_livro.isbn.setText(dados_livro['isbn'])
         pixmap = QPixmap(self.firebase.getCapa(path_img, dados_livro['isbn']))
         pixmap1 = pixmap.scaled(161, 201)
         self.tela_editar_livro.colocar_imagem.setPixmap(pixmap1)
-        
+        self.tela_editar_livro.caminho_img = path_img
         self.QtStack.setCurrentIndex(6)
 
     def buscar(self):
@@ -214,6 +222,38 @@ class Main(QMainWindow, Ui_Main):
         else:
             print('titulo')
 
+    def editarLivro(self):
+        self.editar_livro = {
+                    'isbn': str(self.tela_editar_livro.isbn.text()),
+                    'titulo': str(self.tela_editar_livro.titulo.text()),
+                    'autor': str(self.tela_editar_livro.autor.text()),
+                    'quantPaginas': str(self.tela_editar_livro.qtd_pag.text()),
+                    'ano': str(self.tela_editar_livro.ano_publi.text()),
+                    'pathCapa': str(self.tela_editar_livro.caminho_img),
+                    'capaEdited': self.capaEdited
+                    }
+        if self.firebase.editarLivro(self.editar_livro): 
+            QMessageBox.about(self,'Atenção', 'Livro editado com sucesso!!')
+            self.QtStack.setCurrentIndex(2)
+        else:
+            QMessageBox.about(self,'Atenção', 'Livro não editado!!')
+            self.QtStack.setCurrentIndex(2)
+
+    def selecionarImagemEditar(self):
+        self.fileNameEditar, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Single File', '/home', "PNG (*.png);;JPEG  (*.jpeg);;JPG  (*.jpg)")
+        pixmap = QPixmap(self.fileNameEditar)
+        pixmap1 = pixmap.scaled(161, 201)
+        self.tela_editar_livro.caminho_img = self.fileNameEditar
+        self.capaEdited = True
+        self.tela_editar_livro.colocar_imagem.setPixmap(pixmap1)
+
+    def excluirLivro(self):
+        if self.firebase.excluirLivro(self.tela_editar_livro.isbn.text(), self.tela_editar_livro.caminho_img):
+            QMessageBox.about(self,'Atenção', 'Livro excluido com sucesso!!')
+            self.QtStack.setCurrentIndex(2)
+        else:
+            QMessageBox.about(self,'Atenção', 'Livro não excluido!!')
+            self.QtStack.setCurrentIndex(2)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

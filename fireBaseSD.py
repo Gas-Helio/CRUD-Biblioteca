@@ -229,6 +229,23 @@ class FireBaseSD:
 
     def buscarPeloIsbn(self, isbn):
         return self._db.child('books/'+str(isbn)).get().val()
+    def editarLivro(self, dados):
+        try:
+            if dados['capaEdited']:
+                self.addCapa('images/books/'+dados['isbn']+'.png', dados['pathCapa'])
+                dados['pathCapa'] = 'images/books/'+dados['isbn']+'.png'
+                del dados['capaEdited']
+            self._db.child('books/'+dados['isbn']).update(dados)
+            return True
+        except:
+            return False
+    
+    def excluirLivro(self, isbn, path):
+        try:
+            self._db.child('books/'+isbn).remove()
+            return True
+        except:
+            return False
 
 # Inicio validação
 
