@@ -249,6 +249,39 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>290</y>
+      <width>291</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>ISBN: </string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="isbn">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>320</y>
+      <width>291</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+   </widget>
    <zorder>textBrowser</zorder>
    <zorder>label_2</zorder>
    <zorder>textBrowser_3</zorder>
@@ -264,6 +297,8 @@
    <zorder>textBrowser_2</zorder>
    <zorder>colocar_imagem</zorder>
    <zorder>label_5</zorder>
+   <zorder>label_4</zorder>
+   <zorder>isbn</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
