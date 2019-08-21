@@ -92,6 +92,7 @@ class Main(QMainWindow, Ui_Main):
 
         self.tela_buscar.botao_voltar.clicked.connect(self.voltarPrincipal)
         self.tela_buscar.tableWidget.cellClicked.connect(self.celulaClicada)
+        self.tela_buscar.pushButton.clicked.connect(self.buscar)
 
     def openCriarConta(self):
         self.QtStack.setCurrentIndex(1)
@@ -194,6 +195,24 @@ class Main(QMainWindow, Ui_Main):
         self.tela_editar_livro.colocar_imagem.setPixmap(pixmap1)
         
         self.QtStack.setCurrentIndex(6)
+
+    def buscar(self):
+            
+        if self.tela_buscar.comboBox.currentText() == 'ISBN':
+            dados_livros = self.firebase.buscarPeloIsbn(self.tela_buscar.lineEdit.text())
+            if dados_livros != None:
+                for _ in range(self.tela_buscar.tableWidget.rowCount()):
+                    self.tela_buscar.tableWidget.removeRow(_)
+                self.tela_buscar.tableWidget.setRowCount(1)
+                self.tela_buscar.tableWidget.setItem(0, 0, QTableWidgetItem(str(self.tela_buscar.lineEdit.text())))
+                self.tela_buscar.tableWidget.setItem(0, 1, QTableWidgetItem(str(dados_livros['titulo'])))
+                self.tela_buscar.tableWidget.setItem(0, 2, QTableWidgetItem(str(dados_livros['autor'])))
+                self.tela_buscar.tableWidget.setItem(0, 3, QTableWidgetItem(str(dados_livros['quantPaginas'])))
+                self.tela_buscar.tableWidget.setItem(0, 4, QTableWidgetItem(str(dados_livros['ano'])))
+            else:
+                QMessageBox.about(self, "Atenção", "Não foi encontrado nenhum livro com: "+self.tela_buscar.lineEdit.text())
+        else:
+            print('titulo')
 
 
 if __name__ == '__main__':

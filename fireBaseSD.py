@@ -227,6 +227,9 @@ class FireBaseSD:
         except:
             return ''
 
+    def buscarPeloIsbn(self, isbn):
+        return self._db.child('books/'+str(isbn)).get().val()
+
 # Inicio validação
 
 # Fim validação
