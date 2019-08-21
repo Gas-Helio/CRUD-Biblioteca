@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox, QApplication
 from telas.tela_inicial import Ui_Tela_Inicio
 from telas.tela_cadastro import Ui_Tela_Cadastro
 from telas.tela_cadastro_livro import Ui_Tela_Cadastro_Livro
+from telas.tela_buscar import Ui_Tela_Buscar
 from telas.tela_principal import Ui_Tela_Principal
 import sys
 import os
@@ -31,6 +32,7 @@ class Ui_Main(QtWidgets.QWidget):
         self.stack1 = QtWidgets.QMainWindow()
         self.stack2 = QtWidgets.QMainWindow()
         self.stack3 = QtWidgets.QMainWindow()
+        self.stack4 = QtWidgets.QMainWindow()
 
         self.tela_inicio = Ui_Tela_Inicio()
         self.tela_inicio.setupUi(self.stack0)
@@ -44,10 +46,14 @@ class Ui_Main(QtWidgets.QWidget):
         self.tela_cadastro_livro = Ui_Tela_Cadastro_Livro()
         self.tela_cadastro_livro.setupUi(self.stack3)
 
+        self.tela_buscar = Ui_Tela_Cadastro_Livro()
+        self.tela_buscar.setupUi(self.stack4)
+
         self.QtStack.addWidget(self.stack0)
         self.QtStack.addWidget(self.stack1)
         self.QtStack.addWidget(self.stack2)
         self.QtStack.addWidget(self.stack3)
+        self.QtStack.addWidget(self.stack4)
 
 
 class Main(QMainWindow, Ui_Main):
@@ -102,14 +108,10 @@ class Main(QMainWindow, Ui_Main):
     def openCadastrarLivro(self):
         self.QtStack.setCurrentIndex(3)
 
-    def cadastrarLivro(self):
-        dados_livro = {
-                'titulo': self.tela_cadastro_livro.titulo.text(),
-                'isbn': '',
-                'quantPaginas': self.tela_cadastro_livro.qtd_pag.text(),
-                'autor': self.tela_cadastro_livro.autor.text(),
-                'ano': self.tela_cadastro_livro.ano_publi.text()
-                }
+
+    def openBuscar(self):
+        self.tela_buscar
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

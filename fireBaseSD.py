@@ -104,8 +104,8 @@ class FireBaseSD:
         return None
 
     def addBook(self, dados):
-        if check_host():
-            return 'Não conectado'
+        # if check_host():
+        #     return 'Não conectado'
         try:
             isbn = dados['isbn']
             del dados['isbn']
@@ -114,11 +114,11 @@ class FireBaseSD:
                 self.addCapa('images/books/'+dados['isbn']+'.png', dados['pathCapa'])
                 dados['pathCapa'] = 'images/books/'+dados['isbn']+'.png'
             self._db.child('books').child(isbn).set(dados)
-            return 'Ok'
+            return True
         except Exception as e:
             _error_json = e.args[1]
             _error = json.loads(_error_json)['error']
-            return _error['message']
+            return False
     
     def addCapa(self, pathFB, pathPC):
         if check_host():
