@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'tela_cadastro_livro.ui'
+# Form implementation generated from reading ui file 'telas/tela_cadastro_livro.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -99,9 +99,20 @@ class Ui_Tela_Cadastro_Livro(object):
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_2.setGeometry(QtCore.QRect(110, 130, 161, 201))
         self.textBrowser_2.setObjectName("textBrowser_2")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(290, 290, 291, 24))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName("label_4")
+        self.isbn = QtWidgets.QLineEdit(self.centralwidget)
+        self.isbn.setGeometry(QtCore.QRect(290, 320, 291, 28))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.isbn.setFont(font)
+        self.isbn.setObjectName("isbn")
         self.textBrowser.raise_()
         self.label_2.raise_()
-        self.label_5.raise_()
         self.textBrowser_3.raise_()
         self.label_7.raise_()
         self.titulo.raise_()
@@ -114,6 +125,9 @@ class Ui_Tela_Cadastro_Livro(object):
         self.botao_selecionar_img.raise_()
         self.textBrowser_2.raise_()
         self.colocar_imagem.raise_()
+        self.label_5.raise_()
+        self.label_4.raise_()
+        self.isbn.raise_()
         Tela_Cadastro_Livro.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Tela_Cadastro_Livro)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 926, 22))
@@ -144,6 +158,7 @@ class Ui_Tela_Cadastro_Livro(object):
         self.label_5.setText(_translate("Tela_Cadastro_Livro", "Ano de publicação:"))
         self.botao_selecionar_img.setText(_translate("Tela_Cadastro_Livro", "SELECIONAR IMAGEM"))
         self.label_7.setText(_translate("Tela_Cadastro_Livro", "Quantidade de páginas:"))
+        self.label_4.setText(_translate("Tela_Cadastro_Livro", "ISBN: "))
         self.actionMOSTRAR_LIVROS_CADASTRADOS.setText(_translate("Tela_Cadastro_Livro", "MOSTRAR LIVROS CADASTRADOS"))
         self.actionBUSCAR.setText(_translate("Tela_Cadastro_Livro", "BUSCAR"))
         self.actionEDITAR.setText(_translate("Tela_Cadastro_Livro", "EDITAR"))

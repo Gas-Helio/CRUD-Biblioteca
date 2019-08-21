@@ -52,7 +52,8 @@ class FireBaseSD:
             return None, None
 
     def login(self, email, password):
-        
+        if not check_host():
+            return 'Não conectado'
         try:
             self._user = self._auth.sign_in_with_email_and_password(email, password)
             return self._user
@@ -62,7 +63,7 @@ class FireBaseSD:
             return None
 
     def updateUserDados(self, dados):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         try:
             self._db.child('users').child(self._user['localId']).update(dados)
@@ -73,12 +74,12 @@ class FireBaseSD:
             return _error['message']
 
     def desativaUser(self):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         return self.updateUserDados({'ativo': False})
 
     def ativaUser(self):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         return self.updateUserDados({'ativo': True})
 
@@ -89,7 +90,7 @@ class FireBaseSD:
         return [user.val()['nome'] for user in all_users.each()]
 
     def buscaUser(self, dados): # nome ou email mudar
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         all_users = self._db.child("users").get()
         keys = dados.keys()
@@ -104,15 +105,15 @@ class FireBaseSD:
         return None
 
     def addBook(self, dados):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         try:
             isbn = dados['isbn']
             del dados['isbn']
             if 'visible' not in dados.keys(): dados['visible'] = True
             if 'pathCapa' in list(dados.keys()):
-                self.addCapa('images/books/'+dados['isbn']+'.png', dados['pathCapa'])
-                dados['pathCapa'] = 'images/books/'+dados['isbn']+'.png'
+                self.addCapa('images/books/'+isbn+'.png', dados['pathCapa'])
+                dados['pathCapa'] = 'images/books/'+isbn+'.png'
             self._db.child('books').child(isbn).set(dados)
             return 'Ok'
         except Exception as e:
@@ -121,7 +122,7 @@ class FireBaseSD:
             return _error['message']
     
     def addCapa(self, pathFB, pathPC):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         try:
             self._storage.child(pathFB).put(pathPC)
@@ -152,7 +153,7 @@ class FireBaseSD:
         return 'Ok'
 
     def buscaBook(self, dados, invisibles=False):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         all_books = self._db.child("books").get()
         keys = dados.keys()
@@ -168,7 +169,7 @@ class FireBaseSD:
         return None
 
     def updateBook(self, dados):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         busca = {}
         if 'isbn' in dados.keys():
@@ -192,7 +193,7 @@ class FireBaseSD:
             return _error['message']
         
     def setBookInvisible(self, dados):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         book = self.buscaBook(dados)
         if book == None:
@@ -200,7 +201,7 @@ class FireBaseSD:
         self._db.child('books').child(book['isbn']).update({'visible': False})
 
     def setBookVisible(self, dados):
-        if check_host():
+        if not check_host():
             return 'Não conectado'
         book = self.buscaBook(dados, True)
         if book == None:
