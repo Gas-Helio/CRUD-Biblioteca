@@ -215,10 +215,17 @@ class FireBaseSD:
         return self._db.child('books').get().val()
 
     def buscarOneBook(self, isbn):
-        return self._db.child('books/'+str(isbn)).get().val()
+        return self._db.child('books/'+str(isbn)+'/pathCapa').get().val()
 
     def buscarPorTitulo(self, titulo):
         pass
+
+    def getCapa(self, path, isbn):
+        try:
+            self._storage.child(str(path)).download('images/downloaded_'+str(isbn)+'.png')
+            return 'images/downloaded_'+str(isbn)+'.png'
+        except:
+            return ''
 
 # Inicio validação
 

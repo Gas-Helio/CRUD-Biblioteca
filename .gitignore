@@ -7,7 +7,7 @@ crud/
 .vscode/
 # C extensions
 *.so
-
+images/downloaded_*
 # Distribution / packaging
 .Python
 build/

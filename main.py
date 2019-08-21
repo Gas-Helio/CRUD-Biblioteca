@@ -179,17 +179,22 @@ class Main(QMainWindow, Ui_Main):
     def celulaClicada(self):
         row = self.tela_buscar.tableWidget.currentRow()
         
-        # dados_livro = {
-        #             'isbn': self.tela_buscar.tableWidget.item(row, 0).text(),
-        #             'titulo': self.tela_buscar.tableWidget.item(row, 1).text(),
-        #             'autor': self.tela_buscar.tableWidget.item(row, 2).text(),
-        #             'qauntPaginas': self.tela_buscar.tableWidget.item(row, 3).text(),
-        #             'ano': self.tela_buscar.tableWidget.item(row, 4).text()
-        #             }
+        dados_livro = {
+                    'isbn': self.tela_buscar.tableWidget.item(row, 0).text(),
+                    'titulo': self.tela_buscar.tableWidget.item(row, 1).text(),
+                    'autor': self.tela_buscar.tableWidget.item(row, 2).text(),
+                    'qauntPaginas': self.tela_buscar.tableWidget.item(row, 3).text(),
+                    'ano': self.tela_buscar.tableWidget.item(row, 4).text()
+                    }
+        path_img = self.firebase.buscarOneBook(self.tela_buscar.tableWidget.item(row, 0).text())
+        self.tela_editar_livro.titulo.setText(dados_livro['titulo'])
+        self.tela_editar_livro.ano_publi.setText(dados_livro['ano'])
+        pixmap = QPixmap(self.firebase.getCapa(path_img, dados_livro['isbn']))
+        pixmap1 = pixmap.scaled(161, 201)
+        self.tela_editar_livro.colocar_imagem.setPixmap(pixmap1)
         
-        # print(dados_livro)
-        dados_livros = self.firebase.buscarOneBook(self.tela_buscar.tableWidget.item(row, 0).text())
-        print(dados_livros)
+        self.QtStack.setCurrentIndex(6)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
