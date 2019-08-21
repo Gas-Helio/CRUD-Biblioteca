@@ -97,7 +97,7 @@ class Ui_Tela_Inicio(object):
 
     def retranslateUi(self, Tela_Inicio):
         _translate = QtCore.QCoreApplication.translate
-        Tela_Inicio.setWindowTitle(_translate("Tela_Inicio", "MainWindow"))
+        Tela_Inicio.setWindowTitle(_translate("Tela_Inicio", "Login"))
         self.label_3.setText(_translate("Tela_Inicio", "LOGIN"))
         self.label_2.setText(_translate("Tela_Inicio", "Senha:"))
         self.label.setText(_translate("Tela_Inicio", "E-mail:"))

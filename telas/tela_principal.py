@@ -79,7 +79,7 @@ class Ui_Tela_Principal(object):
 
     def retranslateUi(self, Tela_Principal):
         _translate = QtCore.QCoreApplication.translate
-        Tela_Principal.setWindowTitle(_translate("Tela_Principal", "MainWindow"))
+        Tela_Principal.setWindowTitle(_translate("Tela_Principal", "Início"))
         self.ver_acervo.setText(_translate("Tela_Principal", "VER ACERVO"))
         self.cadastrar_novo_livro.setText(_translate("Tela_Principal", "CADASTAR NOVO LIVRO"))
         self.sair.setText(_translate("Tela_Principal", "SAIR"))

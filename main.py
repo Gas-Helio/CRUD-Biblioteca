@@ -1,12 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QMessageBox, QApplication
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QApplication, QTableWidgetItem
 from telas.tela_inicial import Ui_Tela_Inicio
 from telas.tela_cadastro import Ui_Tela_Cadastro
 from telas.tela_cadastro_livro import Ui_Tela_Cadastro_Livro
 from telas.tela_buscar import Ui_Tela_Buscar
 from telas.tela_principal import Ui_Tela_Principal
 from telas.tela_acervo import Ui_Tela_Acervo
+from telas.tela_buscar import Ui_Tela_Buscar
 from PyQt5.QtGui import QPixmap
+import PyQt5
 import sys
 import os
 from PyQt5.QtCore import pyqtSlot
@@ -35,6 +37,7 @@ class Ui_Main(QtWidgets.QWidget):
         self.stack2 = QtWidgets.QMainWindow()
         self.stack3 = QtWidgets.QMainWindow()
         self.stack4 = QtWidgets.QMainWindow()
+        self.stack5 = QtWidgets.QMainWindow()
 
         self.tela_inicio = Ui_Tela_Inicio()
         self.tela_inicio.setupUi(self.stack0)
@@ -51,11 +54,15 @@ class Ui_Main(QtWidgets.QWidget):
         self.tela_acervo = Ui_Tela_Acervo()
         self.tela_acervo.setupUi(self.stack4)
 
+        self.tela_buscar = Ui_Tela_Buscar()
+        self.tela_buscar.setupUi(self.stack5)
+
         self.QtStack.addWidget(self.stack0)
         self.QtStack.addWidget(self.stack1)
         self.QtStack.addWidget(self.stack2)
         self.QtStack.addWidget(self.stack3)
         self.QtStack.addWidget(self.stack4)
+        self.QtStack.addWidget(self.stack5)
 
 
 class Main(QMainWindow, Ui_Main):
@@ -76,6 +83,8 @@ class Main(QMainWindow, Ui_Main):
 
         self.tela_cadastro_livro.botao_selecionar_img.clicked.connect(self.selecionarImagem)
         self.tela_cadastro_livro.botao_salvar_livro.clicked.connect(self.cadastrarLivro)
+
+        self.tela_buscar.botao_voltar.clicked.connect(self.voltarPrincipal)
 
 
     def openCriarConta(self):
@@ -112,24 +121,37 @@ class Main(QMainWindow, Ui_Main):
     def voltarInicio(self):
         self.QtStack.setCurrentIndex(0)
 
+    def voltarPrincipal(self):
+        self.QtStack.setCurrentIndex(2)
 
     def openCadastrarLivro(self):
         self.QtStack.setCurrentIndex(3)
 
     def openAcervoLivro(self):
-        print('foi')
-        self.QtStack.setCurrentIndex(4)
+        dados_livros = self.firebase.buscarAllBooks()
+
+        self.tela_buscar.tableWidget.setColumnWidth(0, 293)
+        self.tela_buscar.tableWidget.setColumnWidth(1, 293)
+        self.tela_buscar.tableWidget.setColumnWidth(2, 165)
+        self.tela_buscar.tableWidget.setColumnWidth(3, 127)
+
+        if dados_livros != None:
+            self.tela_buscar.tableWidget.setRowCount(len(dados_livros))
+            for i, value in enumerate(dados_livros):
+                self.tela_buscar.tableWidget.setItem(i, 0, QTableWidgetItem(str(dados_livros[value]['titulo'])))
+                self.tela_buscar.tableWidget.setItem(i, 1, QTableWidgetItem(str(dados_livros[value]['autor'])))
+                self.tela_buscar.tableWidget.setItem(i, 2, QTableWidgetItem(str(dados_livros[value]['quantPaginas'])))
+                self.tela_buscar.tableWidget.setItem(i, 3, QTableWidgetItem(str(dados_livros[value]['ano'])))
+
+        self.QtStack.setCurrentIndex(5)
     
     def selecionarImagem(self):
-        # fileName = QtGui.QFileDialog.getOpenFileName(self,'Single File','C:\'','*.*')
-        self.fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Single File', QtCore.QDir.rootPath() , '*.png')
-        # self.ui.lineEdit.setText(fileName)
-        # self.image,_ = QFileDialog.getOpenFileName(self, 'pushButton_2', '/home', "PNG (*.png);;JPEG  (*.jpeg);;JPG  (*.jpg)")
-        # print(image)
-        # pixmap = QPixmap(self.image)
-        # pixmap1 = pixmap.scaled(121,161)
-        # print(pixmap1)
-        #self.label_6.setPixmap(pixmap1)
+        import os
+        homedir = os.environ['HOME']
+        self.fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Single File', '/home', "PNG (*.png);;JPEG  (*.jpeg);;JPG  (*.jpg)")
+        pixmap = QPixmap(self.fileName)
+        pixmap1 = pixmap.scaled(161, 201)
+        self.tela_cadastro_livro.colocar_imagem.setPixmap(pixmap1)
 
     def cadastrarLivro(self):
         dados_livro = {
@@ -140,9 +162,11 @@ class Main(QMainWindow, Ui_Main):
             'ano': self.tela_cadastro_livro.ano_publi.text(),
             'pathCapa': self.fileName
         }
-        print(self.firebase.addBook(dados_livro))
-        print(dados_livro)
-
+        if self.firebase.addBook(dados_livro):
+            QMessageBox.about(self, 'Atenção', 'Livro cadastrado com sucesso!')
+            self.QtStack.setCurrentIndex(2)
+        else:
+            QMessageBox.about(self, 'Atenção', 'Erro ao cadastrar livro!')
 
 
 if __name__ == '__main__':

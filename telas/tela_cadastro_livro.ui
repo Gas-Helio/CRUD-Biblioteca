@@ -295,10 +295,10 @@
    <zorder>botao_salvar_livro</zorder>
    <zorder>botao_selecionar_img</zorder>
    <zorder>textBrowser_2</zorder>
-   <zorder>colocar_imagem</zorder>
    <zorder>label_5</zorder>
    <zorder>label_4</zorder>
    <zorder>isbn</zorder>
+   <zorder>colocar_imagem</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

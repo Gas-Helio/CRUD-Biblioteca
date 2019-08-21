@@ -14,6 +14,7 @@ class Ui_Tela_Cadastro_Livro(object):
     def setupUi(self, Tela_Cadastro_Livro):
         Tela_Cadastro_Livro.setObjectName("Tela_Cadastro_Livro")
         Tela_Cadastro_Livro.resize(926, 547)
+        Tela_Cadastro_Livro.setFixedSize(926, 547)
         Tela_Cadastro_Livro.setWindowOpacity(1.0)
         self.centralwidget = QtWidgets.QWidget(Tela_Cadastro_Livro)
         self.centralwidget.setObjectName("centralwidget")
@@ -150,7 +151,7 @@ class Ui_Tela_Cadastro_Livro(object):
 
     def retranslateUi(self, Tela_Cadastro_Livro):
         _translate = QtCore.QCoreApplication.translate
-        Tela_Cadastro_Livro.setWindowTitle(_translate("Tela_Cadastro_Livro", "MainWindow"))
+        Tela_Cadastro_Livro.setWindowTitle(_translate("Tela_Cadastro_Livro", "Cadastrar livro"))
         self.label.setText(_translate("Tela_Cadastro_Livro", "Título:"))
         self.label_2.setText(_translate("Tela_Cadastro_Livro", "Dados do livro"))
         self.botao_salvar_livro.setText(_translate("Tela_Cadastro_Livro", "SALVAR"))

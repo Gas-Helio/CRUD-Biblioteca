@@ -211,6 +211,12 @@ class FireBaseSD:
     def buscarUsuario(self, id):
         return self._db.child('users/'+str(id)).get().val()
 
+    def buscarAllBooks(self):
+        return self._db.child('books').get().val()
+
+    def buscarPorTitulo(self, titulo):
+        pass
+
 # Inicio validação
 
 # Fim validação

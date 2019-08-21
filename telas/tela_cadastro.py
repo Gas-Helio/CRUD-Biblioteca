@@ -108,7 +108,7 @@ class Ui_Tela_Cadastro(object):
 
     def retranslateUi(self, Tela_Cadastro):
         _translate = QtCore.QCoreApplication.translate
-        Tela_Cadastro.setWindowTitle(_translate("Tela_Cadastro", "MainWindow"))
+        Tela_Cadastro.setWindowTitle(_translate("Tela_Cadastro", "Cadastrar usuário"))
         self.label_3.setText(_translate("Tela_Cadastro", "CADASTRO"))
         self.botao_salvar.setText(_translate("Tela_Cadastro", "SALVAR"))
         self.label_2.setText(_translate("Tela_Cadastro", "E-mail:"))
