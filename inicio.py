@@ -106,7 +106,6 @@ class Main(QMainWindow, Ui_Main):
         self.QtStack.setCurrentIndex(1)
 
     def entrar(self):
-        self.QtStack.setCurrentIndex(2)
         self.user = self.firebase.login(self.tela_inicio.e_mail_login.text(), 
                                     self.tela_inicio.senha_login.text())
         if self.user != None:
