@@ -170,8 +170,8 @@ class FireBaseSD:
         for book in all_books.each():
             bookV = book.val()
             bookV['isbn'] = book.key()
-            if 'nome' in keys:
-                if (bookV['nome'].lower() == dados['nome'].lower()) & ((bookV['visible']) | (invisibles)):
+            if 'titulo' in keys:
+                if (bookV['titulo'].lower() == dados['titulo'].lower()) & ((bookV['visible']) | (invisibles)):
                     return bookV
             if 'isbn' in keys:
                 if (bookV['isbn'] == dados['isbn']) & ((bookV['visible']) | (invisibles)):

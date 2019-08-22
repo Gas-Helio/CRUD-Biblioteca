@@ -31,6 +31,7 @@ class Ui_Tela_Buscar(object):
         self.comboBox.setGeometry(QtCore.QRect(500, 80, 85, 30))
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(430, 20, 131, 20))
         font = QtGui.QFont()
@@ -69,6 +70,7 @@ class Ui_Tela_Buscar(object):
         Tela_Buscar.setWindowTitle(_translate("Tela_Buscar", "Acervo"))
         self.pushButton.setText(_translate("Tela_Buscar", "BUSCAR"))
         self.comboBox.setItemText(0, _translate("Tela_Buscar", "ISBN"))
+        self.comboBox.setItemText(1, _translate("Tela_Buscar", "Titulo"))
         self.label_3.setText(_translate("Tela_Buscar", "BUSCAR"))
 
 

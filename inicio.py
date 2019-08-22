@@ -191,13 +191,15 @@ class Main(QMainWindow, Ui_Main):
             self.tela_cadastro_livro.qtd_pag.setText('')
             self.tela_cadastro_livro.autor.setText('')
             self.tela_cadastro_livro.ano_publi.setText('')
-            self.fileName = ''
-
             if self.firebase.addBook(dados_livro):
                 QMessageBox.about(self, 'Atenção', 'Livro cadastrado com sucesso!')
                 self.QtStack.setCurrentIndex(2)
             else:
                 QMessageBox.about(self, 'Atenção', 'Erro ao cadastrar livro!')
+            self.fileName = 'images/nada.png'
+            pixmap = QPixmap(self.fileName)
+            pixmap1 = pixmap.scaled(161, 201)
+            self.tela_cadastro_livro.colocar_imagem.setPixmap(pixmap1)
 
     def celulaClicada(self):
         row = self.tela_buscar.tableWidget.currentRow()
@@ -222,22 +224,36 @@ class Main(QMainWindow, Ui_Main):
         self.QtStack.setCurrentIndex(6)
 
     def buscar(self):
-            
-        if self.tela_buscar.comboBox.currentText() == 'ISBN':
-            dados_livros = self.firebase.buscarPeloIsbn(self.tela_buscar.lineEdit.text())
-            if dados_livros != None:
-                for _ in range(self.tela_buscar.tableWidget.rowCount()):
-                    self.tela_buscar.tableWidget.removeRow(_)
-                self.tela_buscar.tableWidget.setRowCount(1)
-                self.tela_buscar.tableWidget.setItem(0, 0, QTableWidgetItem(str(self.tela_buscar.lineEdit.text())))
-                self.tela_buscar.tableWidget.setItem(0, 1, QTableWidgetItem(str(dados_livros['titulo'])))
-                self.tela_buscar.tableWidget.setItem(0, 2, QTableWidgetItem(str(dados_livros['autor'])))
-                self.tela_buscar.tableWidget.setItem(0, 3, QTableWidgetItem(str(dados_livros['quantPaginas'])))
-                self.tela_buscar.tableWidget.setItem(0, 4, QTableWidgetItem(str(dados_livros['ano'])))
-            else:
-                QMessageBox.about(self, "Atenção", "Não foi encontrado nenhum livro com: "+self.tela_buscar.lineEdit.text())
+        if self.tela_buscar.lineEdit.text() == '':
+                QMessageBox.about(self, "Atenção", "Campo em branco")
         else:
-            print('titulo')
+            if self.tela_buscar.comboBox.currentText() == 'ISBN':
+                dados_livros = self.firebase.buscarPeloIsbn(self.tela_buscar.lineEdit.text())
+                if dados_livros != None:
+                    for _ in range(self.tela_buscar.tableWidget.rowCount()):
+                        self.tela_buscar.tableWidget.removeRow(_)
+                    self.tela_buscar.tableWidget.setRowCount(1)
+                    self.tela_buscar.tableWidget.setItem(0, 0, QTableWidgetItem(str(self.tela_buscar.lineEdit.text())))
+                    self.tela_buscar.tableWidget.setItem(0, 1, QTableWidgetItem(str(dados_livros['titulo'])))
+                    self.tela_buscar.tableWidget.setItem(0, 2, QTableWidgetItem(str(dados_livros['autor'])))
+                    self.tela_buscar.tableWidget.setItem(0, 3, QTableWidgetItem(str(dados_livros['quantPaginas'])))
+                    self.tela_buscar.tableWidget.setItem(0, 4, QTableWidgetItem(str(dados_livros['ano'])))
+                else:
+                    QMessageBox.about(self, "Atenção", "Não foi encontrado nenhum livro com: "+self.tela_buscar.lineEdit.text())
+            elif self.tela_buscar.comboBox.currentText() == 'Titulo':
+                dados_livros = self.firebase.buscaBook({'titulo':self.tela_buscar.lineEdit.text()})
+                if dados_livros != None:
+                    for _ in range(self.tela_buscar.tableWidget.rowCount()):
+                        self.tela_buscar.tableWidget.removeRow(_)
+                    self.tela_buscar.tableWidget.setRowCount(1)
+                    print(dados_livros)
+                    self.tela_buscar.tableWidget.setItem(0, 0, QTableWidgetItem(str(self.tela_buscar.lineEdit.text())))
+                    self.tela_buscar.tableWidget.setItem(0, 1, QTableWidgetItem(str(dados_livros['titulo'])))
+                    self.tela_buscar.tableWidget.setItem(0, 2, QTableWidgetItem(str(dados_livros['autor'])))
+                    self.tela_buscar.tableWidget.setItem(0, 3, QTableWidgetItem(str(dados_livros['quantPaginas'])))
+                    self.tela_buscar.tableWidget.setItem(0, 4, QTableWidgetItem(str(dados_livros['ano'])))
+                else:
+                    QMessageBox.about(self, "Atenção", "Não foi encontrado nenhum livro com: "+self.tela_buscar.lineEdit.text())
 
     def editarLivro(self):
         self.editar_livro = {
