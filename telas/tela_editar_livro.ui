@@ -302,6 +302,29 @@
       <normaloff>../images/delete_4219.png</normaloff>../images/delete_4219.png</iconset>
     </property>
    </widget>
+   <widget class="QPushButton" name="botao_voltar">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>60</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../images/back_12955.png</normaloff>../images/back_12955.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>28</width>
+      <height>28</height>
+     </size>
+    </property>
+   </widget>
    <zorder>textBrowser</zorder>
    <zorder>label_2</zorder>
    <zorder>textBrowser_3</zorder>
@@ -320,6 +343,7 @@
    <zorder>isbn</zorder>
    <zorder>colocar_imagem</zorder>
    <zorder>botao_excluir_livro</zorder>
+   <zorder>botao_voltar</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -327,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>926</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

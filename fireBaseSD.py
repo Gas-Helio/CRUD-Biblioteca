@@ -37,6 +37,8 @@ class FireBaseSD:
             os.makedirs(cacheImgs)
 
     def creatUser(self, dados):
+        if not check_host():
+            return 'Não conectado'
         dado = None
         try:
             _email = dados['email']
@@ -48,8 +50,16 @@ class FireBaseSD:
             return self._user, dado
         except Exception as e:
             _error_json = e.args[1]
-            _error = json.loads(_error_json)['error']
-            return None, None
+            _error = json.loads(_error_json)['error']['message']
+            if _error == 'INVALID_EMAIL':
+                dado = 'E-mail invalido'
+            elif _error == 'EMAIL_EXISTS':
+                dado = 'E-mail já cadastrado'
+            elif _error == 'WEAK_PASSWORD : Password should be at least 6 characters':
+                dado = 'Senha fraca: Senha com menos de 6 caracteres'
+            else:
+                dado = _error
+            return None, dado
 
     def login(self, email, password):
         if not check_host():

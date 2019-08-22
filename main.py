@@ -87,9 +87,11 @@ class Main(QMainWindow, Ui_Main):
 
         self.tela_principal.cadastrar_novo_livro.clicked.connect(self.openCadastrarLivro)
         self.tela_principal.ver_acervo.clicked.connect(self.openAcervoLivro)
+        self.tela_principal.sair.clicked.connect(self.voltarInicio)
 
         self.tela_cadastro_livro.botao_selecionar_img.clicked.connect(self.selecionarImagem)
         self.tela_cadastro_livro.botao_salvar_livro.clicked.connect(self.cadastrarLivro)
+        self.tela_cadastro_livro.buttonVoltar.clicked.connect(self.voltarPrincipal)
 
         self.tela_buscar.botao_voltar.clicked.connect(self.voltarPrincipal)
         self.tela_buscar.tableWidget.cellClicked.connect(self.celulaClicada)
@@ -98,12 +100,13 @@ class Main(QMainWindow, Ui_Main):
         self.tela_editar_livro.botao_editar_livro.clicked.connect(self.editarLivro)
         self.tela_editar_livro.botao_selecionar_img.clicked.connect(self.selecionarImagemEditar)
         self.tela_editar_livro.botao_excluir_livro.clicked.connect(self.excluirLivro)
+        self.tela_editar_livro.botao_voltar.clicked.connect(self.openAcervoLivro)
 
     def openCriarConta(self):
         self.QtStack.setCurrentIndex(1)
 
     def entrar(self):
-        # self.QtStack.setCurrentIndex(2)
+        self.QtStack.setCurrentIndex(2)
         self.user = self.firebase.login(self.tela_inicio.e_mail_login.text(), 
                                     self.tela_inicio.senha_login.text())
         if self.user != None:
@@ -128,9 +131,13 @@ class Main(QMainWindow, Ui_Main):
             self.QtStack.setCurrentIndex(0)
             # print('usuario criado '+self.user['email'])
         else:
+            print(dados)
             QMessageBox.about(self, 'Atenção', 'Desculpe, não foi possível completar seu cadastro!')
 
     def voltarInicio(self):
+        self.tela_inicio.e_mail_login.setText('') 
+        self.tela_inicio.senha_login.setText('')
+        self.user != None
         self.QtStack.setCurrentIndex(0)
 
     def voltarPrincipal(self):
@@ -166,6 +173,7 @@ class Main(QMainWindow, Ui_Main):
         pixmap = QPixmap(self.fileName)
         pixmap1 = pixmap.scaled(161, 201)
         self.tela_cadastro_livro.colocar_imagem.setPixmap(pixmap1)
+        self.capaEdited = True
 
     def cadastrarLivro(self):
         dados_livro = {
@@ -174,24 +182,34 @@ class Main(QMainWindow, Ui_Main):
             'quantPaginas': self.tela_cadastro_livro.qtd_pag.text(),
             'autor': self.tela_cadastro_livro.autor.text(),
             'ano': self.tela_cadastro_livro.ano_publi.text(),
-            'pathCapa': self.fileName
         }
-        if self.firebase.addBook(dados_livro):
-            QMessageBox.about(self, 'Atenção', 'Livro cadastrado com sucesso!')
-            self.QtStack.setCurrentIndex(2)
-        else:
-            QMessageBox.about(self, 'Atenção', 'Erro ao cadastrar livro!')
+        if self.capaEdited:
+            dados_livro['pathCapa'] = self.fileName
+        self.capaEdited = False
+        if self.validar(dados_livro):
+            self.tela_cadastro_livro.titulo.setText('')
+            self.tela_cadastro_livro.isbn.setText('')
+            self.tela_cadastro_livro.qtd_pag.setText('')
+            self.tela_cadastro_livro.autor.setText('')
+            self.tela_cadastro_livro.ano_publi.setText('')
+            self.fileName = ''
+
+            if self.firebase.addBook(dados_livro):
+                QMessageBox.about(self, 'Atenção', 'Livro cadastrado com sucesso!')
+                self.QtStack.setCurrentIndex(2)
+            else:
+                QMessageBox.about(self, 'Atenção', 'Erro ao cadastrar livro!')
 
     def celulaClicada(self):
         row = self.tela_buscar.tableWidget.currentRow()
         
         dados_livro = {
-                    'isbn': self.tela_buscar.tableWidget.item(row, 0).text(),
-                    'titulo': self.tela_buscar.tableWidget.item(row, 1).text(),
-                    'autor': self.tela_buscar.tableWidget.item(row, 2).text(),
-                    'quantPaginas': self.tela_buscar.tableWidget.item(row, 3).text(),
-                    'ano': self.tela_buscar.tableWidget.item(row, 4).text()
-                    }
+            'isbn': self.tela_buscar.tableWidget.item(row, 0).text(),
+            'titulo': self.tela_buscar.tableWidget.item(row, 1).text(),
+            'autor': self.tela_buscar.tableWidget.item(row, 2).text(),
+            'quantPaginas': self.tela_buscar.tableWidget.item(row, 3).text(),
+            'ano': self.tela_buscar.tableWidget.item(row, 4).text()
+        }
         path_img = self.firebase.buscarOneBook(self.tela_buscar.tableWidget.item(row, 0).text())
         self.tela_editar_livro.titulo.setText(dados_livro['titulo'])
         self.tela_editar_livro.ano_publi.setText(dados_livro['ano'])
@@ -224,20 +242,23 @@ class Main(QMainWindow, Ui_Main):
 
     def editarLivro(self):
         self.editar_livro = {
-                    'isbn': str(self.tela_editar_livro.isbn.text()),
-                    'titulo': str(self.tela_editar_livro.titulo.text()),
-                    'autor': str(self.tela_editar_livro.autor.text()),
-                    'quantPaginas': str(self.tela_editar_livro.qtd_pag.text()),
-                    'ano': str(self.tela_editar_livro.ano_publi.text()),
-                    'pathCapa': str(self.tela_editar_livro.caminho_img),
-                    'capaEdited': self.capaEdited
-                    }
-        if self.firebase.editarLivro(self.editar_livro): 
-            QMessageBox.about(self,'Atenção', 'Livro editado com sucesso!!')
-            self.QtStack.setCurrentIndex(2)
-        else:
-            QMessageBox.about(self,'Atenção', 'Livro não editado!!')
-            self.QtStack.setCurrentIndex(2)
+            'isbn': str(self.tela_editar_livro.isbn.text()),
+            'titulo': str(self.tela_editar_livro.titulo.text()),
+            'autor': str(self.tela_editar_livro.autor.text()),
+            'quantPaginas': str(self.tela_editar_livro.qtd_pag.text()),
+            'ano': str(self.tela_editar_livro.ano_publi.text()),
+            'pathCapa': str(self.tela_editar_livro.caminho_img),
+            'capaEdited': self.capaEdited
+        }
+
+        if self.validar(self.editar_livro):
+            if self.firebase.editarLivro(self.editar_livro): 
+                QMessageBox.about(self,'Atenção', 'Livro editado com sucesso!!')
+                self.QtStack.setCurrentIndex(2)
+            else:
+                QMessageBox.about(self,'Atenção', 'Livro não editado!!')
+                self.QtStack.setCurrentIndex(2)
+        self.capaEdited = False
 
     def selecionarImagemEditar(self):
         self.fileNameEditar, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Single File', '/home', "PNG (*.png);;JPEG  (*.jpeg);;JPG  (*.jpg)")
@@ -254,6 +275,33 @@ class Main(QMainWindow, Ui_Main):
         else:
             QMessageBox.about(self,'Atenção', 'Livro não excluido!!')
             self.QtStack.setCurrentIndex(2)
+
+    def validar(self, dados):
+        keys = list(dados.keys())
+        if 'isbn' in keys:
+            if ((len(dados['isbn']) != 11) == (len(dados['isbn']) != 13)) or not self.isNumero(dados['isbn']):
+                QMessageBox.about(self,'Atenção', 'ISBN invalido!!')
+                return False
+        if 'quantPaginas' in keys:
+            if self.isNumero(dados['quantPaginas']):
+                if int(dados['quantPaginas']) < 0:
+                    QMessageBox.about(self,'Atenção', 'Quantidade de paginas invalida: Número negativo!!')
+                    return False
+            else:
+                QMessageBox.about(self,'Atenção', 'Quantidade de paginas invalida: Não é número!!')
+                return False
+        if 'ano' in keys:
+            if not self.isNumero(dados['ano']):
+                QMessageBox.about(self,'Atenção', 'Ano de publicação invalido invalido!!')
+                return False
+        return True
+
+    def isNumero(self, dado):
+        try:
+            s = int(dado)
+            return True
+        except:
+            return False
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

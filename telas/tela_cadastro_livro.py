@@ -14,7 +14,6 @@ class Ui_Tela_Cadastro_Livro(object):
     def setupUi(self, Tela_Cadastro_Livro):
         Tela_Cadastro_Livro.setObjectName("Tela_Cadastro_Livro")
         Tela_Cadastro_Livro.resize(926, 547)
-        Tela_Cadastro_Livro.setFixedSize(926, 547)
         Tela_Cadastro_Livro.setWindowOpacity(1.0)
         self.centralwidget = QtWidgets.QWidget(Tela_Cadastro_Livro)
         self.centralwidget.setObjectName("centralwidget")
@@ -112,6 +111,14 @@ class Ui_Tela_Cadastro_Livro(object):
         font.setPointSize(11)
         self.isbn.setFont(font)
         self.isbn.setObjectName("isbn")
+        self.buttonVoltar = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonVoltar.setGeometry(QtCore.QRect(90, 60, 41, 41))
+        self.buttonVoltar.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("images/back_12955.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.buttonVoltar.setIcon(icon2)
+        self.buttonVoltar.setIconSize(QtCore.QSize(28, 28))
+        self.buttonVoltar.setObjectName("buttonVoltar")
         self.textBrowser.raise_()
         self.label_2.raise_()
         self.textBrowser_3.raise_()
@@ -125,10 +132,11 @@ class Ui_Tela_Cadastro_Livro(object):
         self.botao_salvar_livro.raise_()
         self.botao_selecionar_img.raise_()
         self.textBrowser_2.raise_()
-        self.colocar_imagem.raise_()
         self.label_5.raise_()
         self.label_4.raise_()
         self.isbn.raise_()
+        self.colocar_imagem.raise_()
+        self.buttonVoltar.raise_()
         Tela_Cadastro_Livro.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Tela_Cadastro_Livro)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 926, 22))
@@ -151,7 +159,7 @@ class Ui_Tela_Cadastro_Livro(object):
 
     def retranslateUi(self, Tela_Cadastro_Livro):
         _translate = QtCore.QCoreApplication.translate
-        Tela_Cadastro_Livro.setWindowTitle(_translate("Tela_Cadastro_Livro", "Cadastrar livro"))
+        Tela_Cadastro_Livro.setWindowTitle(_translate("Tela_Cadastro_Livro", "MainWindow"))
         self.label.setText(_translate("Tela_Cadastro_Livro", "Título:"))
         self.label_2.setText(_translate("Tela_Cadastro_Livro", "Dados do livro"))
         self.botao_salvar_livro.setText(_translate("Tela_Cadastro_Livro", "SALVAR"))
@@ -164,13 +172,3 @@ class Ui_Tela_Cadastro_Livro(object):
         self.actionBUSCAR.setText(_translate("Tela_Cadastro_Livro", "BUSCAR"))
         self.actionEDITAR.setText(_translate("Tela_Cadastro_Livro", "EDITAR"))
         self.actionLISTAR.setText(_translate("Tela_Cadastro_Livro", "LISTAR LIVROS CADASTRADOS"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Tela_Cadastro_Livro = QtWidgets.QMainWindow()
-    ui = Ui_Tela_Cadastro_Livro()
-    ui.setupUi(Tela_Cadastro_Livro)
-    Tela_Cadastro_Livro.show()
-    sys.exit(app.exec_())

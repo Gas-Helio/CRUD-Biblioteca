@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'tela_editar_livro.ui'
+# Form implementation generated from reading ui file 'telas/tela_editar_livro.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -15,7 +15,6 @@ class Ui_Tela_Editar_Livro(object):
         Tela_Editar_Livro.setObjectName("Tela_Editar_Livro")
         Tela_Editar_Livro.resize(926, 547)
         Tela_Editar_Livro.setWindowOpacity(1.0)
-        self.caminho_img = ''
         self.centralwidget = QtWidgets.QWidget(Tela_Editar_Livro)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -39,7 +38,7 @@ class Ui_Tela_Editar_Livro(object):
         self.botao_editar_livro = QtWidgets.QPushButton(self.centralwidget)
         self.botao_editar_livro.setGeometry(QtCore.QRect(720, 340, 81, 28))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/save_file_disk_open_searsh_loading_clipboard_1513.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/save_file_disk_open_searsh_loading_clipboard_1513.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.botao_editar_livro.setIcon(icon)
         self.botao_editar_livro.setObjectName("botao_editar_livro")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
@@ -78,7 +77,7 @@ class Ui_Tela_Editar_Livro(object):
         font.setPointSize(10)
         self.botao_selecionar_img.setFont(font)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("images/imageup_imagen_12892.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../images/imageup_imagen_12892.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.botao_selecionar_img.setIcon(icon1)
         self.botao_selecionar_img.setObjectName("botao_selecionar_img")
         self.colocar_imagem = QtWidgets.QLabel(self.centralwidget)
@@ -116,9 +115,17 @@ class Ui_Tela_Editar_Livro(object):
         self.botao_excluir_livro = QtWidgets.QPushButton(self.centralwidget)
         self.botao_excluir_livro.setGeometry(QtCore.QRect(620, 340, 91, 28))
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("images/delete_4219.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("../images/delete_4219.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.botao_excluir_livro.setIcon(icon2)
         self.botao_excluir_livro.setObjectName("botao_excluir_livro")
+        self.botao_voltar = QtWidgets.QPushButton(self.centralwidget)
+        self.botao_voltar.setGeometry(QtCore.QRect(90, 60, 41, 41))
+        self.botao_voltar.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("../images/back_12955.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botao_voltar.setIcon(icon3)
+        self.botao_voltar.setIconSize(QtCore.QSize(28, 28))
+        self.botao_voltar.setObjectName("botao_voltar")
         self.textBrowser.raise_()
         self.label_2.raise_()
         self.textBrowser_3.raise_()
@@ -137,9 +144,10 @@ class Ui_Tela_Editar_Livro(object):
         self.isbn.raise_()
         self.colocar_imagem.raise_()
         self.botao_excluir_livro.raise_()
+        self.botao_voltar.raise_()
         Tela_Editar_Livro.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Tela_Editar_Livro)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 926, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 926, 22))
         self.menubar.setObjectName("menubar")
         Tela_Editar_Livro.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Tela_Editar_Livro)
@@ -173,13 +181,3 @@ class Ui_Tela_Editar_Livro(object):
         self.actionBUSCAR.setText(_translate("Tela_Editar_Livro", "BUSCAR"))
         self.actionEDITAR.setText(_translate("Tela_Editar_Livro", "EDITAR"))
         self.actionLISTAR.setText(_translate("Tela_Editar_Livro", "LISTAR LIVROS CADASTRADOS"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Tela_Editar_Livro = QtWidgets.QMainWindow()
-    ui = Ui_Tela_Editar_Livro()
-    ui.setupUi(Tela_Editar_Livro)
-    Tela_Editar_Livro.show()
-    sys.exit(app.exec_())
