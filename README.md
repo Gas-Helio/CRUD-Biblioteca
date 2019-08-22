@@ -19,7 +19,7 @@ Para inicializar o sistema, execute a classe principal do projeto, através do c
     python3 inicio.py
 
 
-## Desenvolvedores
+## Contribuidores
 
 * Deusimar Damião de Sousa - [deusimardamiao](<https://github.com/deusimardamiao/>)
 * Francisco das Chagas dos Anjos Carvalho Junior - [franciscojunior10](<https://github.com/franciscojunior10/>)
@@ -27,4 +27,4 @@ Para inicializar o sistema, execute a classe principal do projeto, através do c
 
 ## Licença
 
-[MIT](https://github.com/JedersonLuz/BibWorld/blob/master/LICENSE)
+[MIT](https://github.com/Gas-Helio/CRUD-Biblioteca/blob/master/LICENSE)
